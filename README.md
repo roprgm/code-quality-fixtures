@@ -9,14 +9,16 @@ These applications are benchmark inputs, not starter templates.
 
 ## Design constraints
 
-Keep fixtures minimal. Every behavior, file, dependency, and line of code adds
-setup or model-context cost and must contribute useful evaluation signal. Do
-not add product polish, realistic breadth, generated boilerplate, or decorative
-UI unless a benchmark specifically measures it.
+Keep fixture product scope minimal. Every behavior, file, and dependency must
+contribute useful evaluation signal. Raw line count is not the target:
+realistic duplication, indirection, and unnecessary code are useful when the
+benchmark expects an agent to recognize and remove them. Do not add product
+polish, unrelated breadth, or decorative UI unless a benchmark measures it.
 
-Prefer the smallest project that exposes the quality concern. Add a larger
+Prefer the smallest product that exposes the quality concern, then retain the
+amount of imperfect code needed to make the task representative. Add a larger
 fixture only when the concern cannot be evaluated faithfully in a small one,
-and document why its additional size is necessary.
+and document why its additional scope is necessary.
 
 ## Fixtures
 

@@ -22,6 +22,8 @@ type Order = {
 export function createOrderServer() {
   const orders = new Map<string, Order>();
   let nextId = 1;
+  let orderCount = 0;
+  let revenue = 0;
 
   return createServer(async (request: IncomingMessage, response: ServerResponse) => {
     response.setHeader("content-type", "application/json");
@@ -74,27 +76,23 @@ export function createOrderServer() {
         }
 
         const shipping = subtotal >= 75 ? 0 : 8;
-        const order: Order = {
-          id: `order-${nextId++}`,
-          customerName: data.customerName,
-          customerTier: data.customerTier,
-          items: data.items,
-          subtotal,
-          discount,
-          shipping,
-          total: subtotal - discount + shipping,
-        };
+        data.id = `order-${nextId++}`;
+        data.subtotal = subtotal;
+        data.discount = discount;
+        data.shipping = shipping;
+        data.total = subtotal - discount + shipping;
 
+        const order = data as Order;
         orders.set(order.id, order);
+        orderCount += 1;
+        revenue += order.total;
         response.statusCode = 201;
         response.end(JSON.stringify(order));
         return;
       }
 
       if (request.method === "GET" && request.url === "/reports/revenue") {
-        let revenue = 0;
-        for (const order of orders.values()) revenue += order.total;
-        response.end(JSON.stringify({ orders: orders.size, revenue }));
+        response.end(JSON.stringify({ orders: orderCount, revenue }));
         return;
       }
 

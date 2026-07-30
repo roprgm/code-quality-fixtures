@@ -19,22 +19,20 @@ function loadTasks() {
 export default function App() {
   const [tasks, setTasks] = useState<Task[]>(loadTasks);
   const [filter, setFilter] = useState("all");
-  const [openCount, setOpenCount] = useState(0);
-  const [completedCount, setCompletedCount] = useState(0);
+  const [openTasks, setOpenTasks] = useState<Task[]>([]);
+  const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    setOpenCount(tasks.filter((task) => !task.completed).length);
-    setCompletedCount(tasks.filter((task) => task.completed).length);
-  }, [tasks]);
-
-  useEffect(() => {
+    setOpenTasks(tasks.filter((task) => !task.completed));
+    setCompletedTasks(tasks.filter((task) => task.completed));
     localStorage.setItem("task-board.tasks", JSON.stringify(tasks));
   }, [tasks]);
 
   function addTask(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
-    const title = new FormData(form).get("title") as string;
+    const data: any = new FormData(form);
+    const title = data.get("title");
     if (!title.trim()) return;
 
     setTasks([
@@ -82,8 +80,8 @@ export default function App() {
   else
     content = (
       <ul>
-        {visibleTasks.map((task) => (
-          <TaskRow key={task.id} task={task} />
+        {visibleTasks.map((task, index) => (
+          <TaskRow key={index} task={task} />
         ))}
       </ul>
     );
@@ -92,7 +90,7 @@ export default function App() {
     <main>
       <h1>Task Board</h1>
       <p>
-        {openCount} open · {completedCount} completed
+        {openTasks.length} open · {completedTasks.length} completed
       </p>
 
       <form onSubmit={addTask}>
@@ -122,7 +120,7 @@ export default function App() {
 
       {content}
 
-      {completedCount > 0 && (
+      {completedTasks.length > 0 && (
         <button
           onClick={() => setTasks(tasks.filter((task) => !task.completed))}
           type="button"
