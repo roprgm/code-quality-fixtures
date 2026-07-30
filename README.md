@@ -26,6 +26,7 @@ and document why its additional scope is necessary.
 | --- | --- | --- |
 | `react-task-board` | React state, rendering, persistence, and ownership | test, typecheck, build, LLM judge |
 | `typescript-order-api` | Domain boundaries, validation, HTTP concerns, and data ownership | test, typecheck, LLM judge |
+| `vite-reading-list` | HTML composition, DOM rendering, state, persistence, and ownership | test, typecheck, build, LLM judge |
 
 Each fixture follows Harbor's native `instruction.md`, `task.toml`,
 `environment/`, and `tests/` structure. Harbor keeps the verifier files outside

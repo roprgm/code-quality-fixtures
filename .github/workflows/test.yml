@@ -19,6 +19,8 @@ jobs:
             build: true
           - fixture: typescript-order-api
             build: false
+          - fixture: vite-reading-list
+            build: true
     defaults:
       run:
         working-directory: fixtures/${{ matrix.fixture }}/environment
