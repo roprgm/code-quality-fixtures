@@ -1,0 +1,23 @@
+schema_version = "1.3"
+artifacts = ["/app"]
+
+[task]
+name = "roprgm/typescript-order-api"
+description = "Refactor a TypeScript order API without changing behavior."
+keywords = ["code-quality", "api", "typescript", "refactoring"]
+[[task.authors]]
+name = "Rodrigo Belfiore"
+
+[metadata]
+category = "code-quality"
+
+[verifier]
+timeout_sec = 300.0
+
+[agent]
+timeout_sec = 600.0
+
+[environment]
+network_mode = "public"
+build_timeout_sec = 600.0
+os = "linux"
