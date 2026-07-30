@@ -1,0 +1,31 @@
+[judge]
+judge = "vercel_ai_gateway/google/gemini-3-flash"
+files = ["/logs/verifier/source.txt"]
+
+[[criterion]]
+name = "trusted_domain_data"
+description = "Untrusted HTTP input is validated at a clear boundary before it becomes typed domain data, without any or unchecked assertions."
+type = "binary"
+
+[[criterion]]
+name = "separated_responsibilities"
+description = "HTTP transport, order validation, pricing, storage, and reporting have clear responsibilities rather than one mixed request handler."
+type = "binary"
+
+[[criterion]]
+name = "single_source_of_truth"
+description = "Stored orders are the source of truth and reporting values are derived without manually synchronized counters or revenue totals."
+type = "binary"
+
+[[criterion]]
+name = "readable_control_flow"
+description = "Names use the order domain vocabulary and the main execution path is easy to scan without deeply nested control flow."
+type = "binary"
+
+[[criterion]]
+name = "proportionate_boundaries"
+description = "Functions and files are cohesive and small enough to understand while avoiding needless layers, generic helper dumping grounds, or pass-through modules."
+type = "binary"
+
+[scoring]
+aggregation = "weighted_mean"

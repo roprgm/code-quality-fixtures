@@ -1,0 +1,31 @@
+[judge]
+judge = "vercel_ai_gateway/google/gemini-3-flash"
+files = ["/logs/verifier/source.txt"]
+
+[[criterion]]
+name = "single_source_of_truth"
+description = "Tasks are the single source of truth; filtered lists and counts are derived instead of synchronized in state."
+type = "binary"
+
+[[criterion]]
+name = "safe_state_updates"
+description = "Updates that depend on existing tasks use the previous state and cannot lose changes because they captured an old render."
+type = "binary"
+
+[[criterion]]
+name = "cohesive_ownership"
+description = "Persistence, task operations, and rendering have clear cohesive ownership without needless layers or pass-through modules."
+type = "binary"
+
+[[criterion]]
+name = "readable_rendering"
+description = "Whole-view alternatives and per-task rendering are easy to scan, use stable identity, and avoid deeply nested conditional expressions or mutable JSX assembly."
+type = "binary"
+
+[[criterion]]
+name = "proportionate_boundaries"
+description = "Names, functions, components, and files reflect distinct responsibilities while remaining proportionate to this small application."
+type = "binary"
+
+[scoring]
+aggregation = "weighted_mean"

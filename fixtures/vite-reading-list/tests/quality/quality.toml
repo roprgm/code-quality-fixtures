@@ -1,0 +1,31 @@
+[judge]
+judge = "vercel_ai_gateway/google/gemini-3-flash"
+files = ["/logs/verifier/source.txt"]
+
+[[criterion]]
+name = "static_html_ownership"
+description = "Stable document structure such as the header, form, navigation, sections, and footer lives in index.html rather than a large TypeScript HTML string; TypeScript renders only genuinely dynamic content."
+type = "binary"
+
+[[criterion]]
+name = "single_source_of_truth"
+description = "Articles are the source of truth; filtered items and counts are derived rather than stored and synchronized manually."
+type = "binary"
+
+[[criterion]]
+name = "safe_content_rendering"
+description = "Article titles and URLs from storage or user input are rendered without interpolating untrusted values into HTML markup."
+type = "binary"
+
+[[criterion]]
+name = "cohesive_ownership"
+description = "Storage, article operations, DOM rendering, and event wiring have clear responsibilities without a monolithic module or needless pass-through layers."
+type = "binary"
+
+[[criterion]]
+name = "proportionate_boundaries"
+description = "HTML and TypeScript boundaries, functions, names, and files make the small application easy to follow without excessive abstraction."
+type = "binary"
+
+[scoring]
+aggregation = "weighted_mean"

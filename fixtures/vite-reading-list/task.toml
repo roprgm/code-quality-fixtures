@@ -1,0 +1,26 @@
+schema_version = "1.3"
+artifacts = ["/app"]
+
+[task]
+name = "roprgm/vite-reading-list"
+description = "Refactor a persistent Vite reading list without changing behavior."
+keywords = ["code-quality", "vite", "typescript", "refactoring"]
+[[task.authors]]
+name = "Rodrigo Belfiore"
+
+[metadata]
+category = "code-quality"
+
+[verifier]
+timeout_sec = 300.0
+
+[verifier.env]
+LITELLM_DROP_PARAMS = "true"
+
+[agent]
+timeout_sec = 600.0
+
+[environment]
+network_mode = "public"
+build_timeout_sec = 600.0
+os = "linux"
