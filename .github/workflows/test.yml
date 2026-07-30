@@ -1,0 +1,36 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  fixtures:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - fixture: react-task-board
+            build: true
+          - fixture: typescript-order-api
+            build: false
+    defaults:
+      run:
+        working-directory: fixtures/${{ matrix.fixture }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: fixtures/${{ matrix.fixture }}/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - if: matrix.build
+        run: npm run build

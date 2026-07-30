@@ -1,0 +1,7 @@
+{
+  "id": "react-task-board",
+  "summary": "A persistent task board with filtering, progress counts, and local updates.",
+  "runtime": "node22",
+  "setup": ["npm ci"],
+  "checks": ["npm test", "npm run typecheck", "npm run build"]
+}

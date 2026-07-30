@@ -1,0 +1,18 @@
+{
+  "fixtures": [
+    {
+      "id": "react-task-board",
+      "path": "fixtures/react-task-board",
+      "runtime": "node22",
+      "setup": ["npm ci"],
+      "checks": ["npm test", "npm run typecheck", "npm run build"]
+    },
+    {
+      "id": "typescript-order-api",
+      "path": "fixtures/typescript-order-api",
+      "runtime": "node22",
+      "setup": ["npm ci"],
+      "checks": ["npm test", "npm run typecheck"]
+    }
+  ]
+}

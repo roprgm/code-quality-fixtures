@@ -1,0 +1,7 @@
+{
+  "id": "typescript-order-api",
+  "summary": "An HTTP order API with pricing, validation, lookup, and revenue reporting.",
+  "runtime": "node22",
+  "setup": ["npm ci"],
+  "checks": ["npm test", "npm run typecheck"]
+}
